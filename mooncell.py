@@ -86,7 +86,6 @@ def gacha_handle_request(mooncell_con):
     """ Lida com as requisições definindo se é preciso procurar o arquivo ou não, recebe a conexão do socket
     e realiza as respostas para cada caso"""
     request = mooncell_con.recv(1024)
-    print(request.decode().strip().split())
     if(len(request.decode().strip().split()) == 0): #Se o request for vazio return
         return
     requested_resource = request.decode().strip().split()[1] #Indentifica a o recurso que tentou se acessado 
@@ -113,25 +112,22 @@ def gacha_handle_request(mooncell_con):
 def mooncell_check_config():
     """ Verifica a confiabilidade dos dados presentes em config.py"""
     if config.ROOT_DIR == None or config.ROOT_DIR == '':
-        print("Diretório definido como ROOT é Nulo/Vazio, verifique o arquivo config.py\n")
+        print("Diretório definido como raiz é Nulo/Vazio, verifique o arquivo de configurações\n")
         return False
     if not os.path.exists(config.ROOT_DIR):
         return False
-        print("Diretório definido como ROOT não existe, verifique o arquivo config.py\n")
-    if os.getcwd() != config.ROOT_DIR:
-        print("Diretório definido como ROOT diferente do local do arquivo atual, verifique o arquivo config.py\n")
-        return False
+        print("Diretório definido como raiz não existe, verifique o arquivo de configurações\n")
     if config.DEFAULT_FILES.__len__() == 0:
-        print("Lista de Default Files vazia, verifique o arquivo config.py\n")
+        print("Lista de Default Files vazia, verifique o arquivo de configurações\n")
         return False
     if config.ERROR_PAGE == None or config.ERROR_PAGE == '':
-        print("Página de Error definida é Nula/Vazia, verifique o arquivo config.py\n")
+        print("Página de erro definida é Nula/Vazia, verifique o arquivo de configurações\n")
         return False
     if not os.path.exists(config.ERROR_PAGE):
-        print("Página de Error não existe, verifique o arquivo config.py\n")
+        print("Página de erro não existe, verifique o arquivo de configurações\n")
         return False
     if config.MESSAGE_NOT_SUPPORTED == None or config.MESSAGE_NOT_SUPPORTED == '':
-        print("Mensagem de tratamento para extensões não suportadas pelo servidor é Nula/Vazia, verifique o arquivo config.py\n")
+        print("Mensagem de tratamento para extensões não suportadas pelo servidor é Nula/Vazia, verifique o arquivo de configurações\n")
         return False
     if config.SERVER_PORT == None:
         print("Porta de acesso Nula, verifique o arquivo config.py\n")
@@ -140,6 +136,16 @@ def mooncell_check_config():
 
 def main():
     """Setup Inicial do server com fork para multiplos clientes"""
+
+    print('''
+███╗   ███╗ ██████╗  ██████╗ ███╗   ██╗ ██████╗███████╗██╗     ██╗     
+████╗ ████║██╔═══██╗██╔═══██╗████╗  ██║██╔════╝██╔════╝██║     ██║     
+██╔████╔██║██║   ██║██║   ██║██╔██╗ ██║██║     █████╗  ██║     ██║     
+██║╚██╔╝██║██║   ██║██║   ██║██║╚██╗██║██║     ██╔══╝  ██║     ██║     
+██║ ╚═╝ ██║╚██████╔╝╚██████╔╝██║ ╚████║╚██████╗███████╗███████╗███████╗
+╚═╝     ╚═╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝╚══════╝╚══════╝╚══════╝
+                                                                       
+''')
 
     if(not mooncell_check_config()):
         return
@@ -172,4 +178,7 @@ def main():
             mooncell_con.close()
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        pass
