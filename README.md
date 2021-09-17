@@ -5,7 +5,7 @@ Paulo Vitor Libório
 Kevin Abreu  
 # Sobre mooncell
 Como forma de descontrair, tanto o nome do repositório quanto a nomenclatura de algumas funções presentes 
-no projeto de server simples, são baseadas na série em anime Fate/EXTRA Last Encore, disponível no Netflix. 
+no projeto de server simples, são baseadas na série em anime fate/EXTRA Last Encore, disponível no Netflix. 
 Esperamos que isso não atrapalhe o entendimento de nenhuma parte do código.
 
 # Configurar o Servidor
