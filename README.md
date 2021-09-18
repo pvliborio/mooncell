@@ -33,7 +33,8 @@ python3 mooncell.py
 ```
 ## O que testamos
 
-Conexão simultânea de mais de um cliente.
+Conexão simultânea de mais de um cliente:
+
 Como o código do mooncell possui um "time.sleep(30)", o mesmo processo é incapaz de lidar com 2 requests dentro
 desse mesmo intervalo.
 Dito isto um teste simples é abrir dois terminais e rodar o comando abaixo dentro do intervalo de tempo.
@@ -41,6 +42,8 @@ Dito isto um teste simples é abrir dois terminais e rodar o comando abaixo dent
 curl http://localhost:<PORTA_ESCOLHIDA_EM_CONFIG>/index.html
 ```
 Caso houvesse um processo único cuidando de tudo, a resposta no segundo terminal só ocorreria após o intervalo de sleep passar.
+
+Também testamos o acesso a arquivos suportados(.gif, .jpeg/.jpg, .png , .html, .js) através do navegador.
 
 ## O que não funcionou dentro do que foi testado
 
