@@ -90,7 +90,7 @@ def gacha_handle_request(mooncell_con):
         return
     requested_resource = request.decode().strip().split()[1] #Indentifica a o recurso que tentou se acessado 
     result = ""
-    if "." not in requested_resource: # Se não houver "." buscar arquivo na lista de Default Files ?***
+    if "." not in requested_resource: # Se o recurso solicitado não for um arquivo, procura se um arquivo na lista de arquivos padrão existe, se não vai dar erro 404
         for file in config.DEFAULT_FILES:
             result = mooncell_search_page('', file)
             if not result == None:
@@ -112,25 +112,29 @@ def gacha_handle_request(mooncell_con):
 def mooncell_check_config():
     """ Verifica a confiabilidade dos dados presentes em config.py"""
     if config.ROOT_DIR == None or config.ROOT_DIR == '':
-        print("Diretório definido como raiz é Nulo/Vazio, verifique o arquivo de configurações\n")
+        print("Diretório definido como raiz é Nulo/Vazio, verifique o arquivo de configurações.\n")
         return False
     if not os.path.exists(config.ROOT_DIR):
         return False
-        print("Diretório definido como raiz não existe, verifique o arquivo de configurações\n")
+        print("Diretório definido como raiz não existe, verifique o arquivo de configurações.\n")
     if config.DEFAULT_FILES.__len__() == 0:
-        print("Lista de Default Files vazia, verifique o arquivo de configurações\n")
+        print("Lista de Default Files vazia, verifique o arquivo de configurações.\n")
         return False
     if config.ERROR_PAGE == None or config.ERROR_PAGE == '':
-        print("Página de erro definida é Nula/Vazia, verifique o arquivo de configurações\n")
+        print("Página de erro definida é Nula/Vazia, verifique o arquivo de configurações.\n")
         return False
     if not os.path.exists(config.ERROR_PAGE):
-        print("Página de erro não existe, verifique o arquivo de configurações\n")
+        print("Página de erro não existe, verifique o arquivo de configurações.\n")
         return False
     if config.MESSAGE_NOT_SUPPORTED == None or config.MESSAGE_NOT_SUPPORTED == '':
-        print("Mensagem de tratamento para extensões não suportadas pelo servidor é Nula/Vazia, verifique o arquivo de configurações\n")
+        print("Mensagem de tratamento para extensões não suportadas pelo servidor é Nula/Vazia, verifique o arquivo de configurações.\n")
         return False
     if config.SERVER_PORT == None:
-        print("Porta de acesso Nula, verifique o arquivo config.py\n")
+        print("Porta de acesso Nula, verifique o arquivo de configurações.\n")
+        return False
+    if (not type(config.SERVER_PORT) == int) or config.SERVER_PORT <= 0:
+        print("Porta não é um inteiro positivo, verifique o arquivo de configurações.")
+        return False
     return True
 
 

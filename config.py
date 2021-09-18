@@ -1,5 +1,5 @@
 # Porta que irá escutar as requisições ao servidor
-SERVER_PORT = 8000
+SERVER_PORT = 80
 
 # Diretório raiz de onde serão servidos os arquivos
 ROOT_DIR = "/mnt/d/PUC/INF1407 - PROGRAMACAO PARA A WEB/mooncell"
